@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15db3626d61e4d96b8f351cb0f975d13" Name="Diagram1">
+        <EntityTypeShape EntityType="iadbModel.Elevation" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iadbModel.NotificationChannel" Width="2.375" PointX="6.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iadbModel.User" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="iadbModel.FK_dbo_Users_dbo_Elevations_ElevationId" ManuallyRouted="false" />
+        <AssociationConnector Association="iadbModel.FK_dbo_NotificationChannels_dbo_Users_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

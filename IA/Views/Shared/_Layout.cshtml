@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IA.Models.ViewModels.UserViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -6,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    
     @Styles.Render("~/styles/bootstrap")
     @Styles.Render("~/styles/local")
     @Scripts.Render("~/bundles/modernizr")
@@ -90,16 +92,22 @@
             </a>
         </div>
     </div>
-
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    
+    <div class="modal fade" id="login-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog">
             <div class="loginmodal-container">
                 <h1>Login to Your Account</h1><br>
-                <form>
-                    <input type="text" name="user" placeholder="Username">
-                    <input type="password" name="pass" placeholder="Password">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "Login Error", new { @class = "alert alert-danger" });
+                    @Html.TextBoxFor(u => u.UserName, new { @placeholder = "Username" });
+                    @Html.PasswordFor(u => u.Password, new { @placeholder = "Password" });
+                    @Html.CheckBoxFor(u => u.RememberMe);
+                    @Html.LabelFor(u => u.RememberMe);
                     <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-                </form>
+                }
+                @*<input type="text" name="user" placeholder="Username">
+                    <input type="password" name="pass" placeholder="Password">*@
 
                 <div class="login-help">
                     <a href="#">Register</a> - <a href="#">Forgot Password</a>
@@ -111,9 +119,14 @@
     <div class="container marketing">
         @RenderBody()
     </div>
-    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @:$("#login-modal").modal("show");
+        }
+    </script>
     @RenderSection("scripts", required: false)
     <footer></footer>
 </body>

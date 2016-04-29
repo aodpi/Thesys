@@ -13,7 +13,7 @@ namespace IA.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604251409209_Initial"; }
+            get { return "201604290506488_Initial"; }
         }
         
         string IMigrationMetadata.Source
