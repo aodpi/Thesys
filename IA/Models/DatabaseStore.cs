@@ -17,8 +17,6 @@ namespace IA.Models
         public DbSet<NotificationChannel> NotificationChannels { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasRequired(u => u.Elevation).WithMany(e => e.Users).HasForeignKey(y => y.ElevationId);
-            modelBuilder.Entity<NotificationChannel>().HasRequired(u => u.User).WithMany(e => e.NotificationChannels).HasForeignKey(y => y.UserId);
             base.OnModelCreating(modelBuilder);
         }
     }

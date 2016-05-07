@@ -2,6 +2,7 @@
 using System.Web.Routing;
 using IA.App_Start;
 using System.Web.Optimization;
+using System.Web.Http;
 
 namespace IA
 {
@@ -9,6 +10,7 @@ namespace IA
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

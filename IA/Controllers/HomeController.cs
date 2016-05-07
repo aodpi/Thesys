@@ -6,20 +6,30 @@ using System.Web.Mvc;
 using IA.Models.ViewModels;
 using System.Web.Security;
 using IA.Extensions;
+using IA.Models;
+
 namespace IA.Controllers
 {
     public class HomeController : Controller
     {
+        private DatabaseStore db = new DatabaseStore();
         // GET: Home
         public ActionResult Index()
         {
             return View();
         }
 
+        public string fff()
+        {
+            var rz = (from a in db.Users
+                      join b in db.Elevations on a.ElevationId equals b.Id
+                      select new { a.UserName, b.ElevationName });
+            return Newtonsoft.Json.JsonConvert.SerializeObject(rz, Newtonsoft.Json.Formatting.Indented);
+        }
+
         [HttpPost]
         public ActionResult Login(UserViewModel mdl)
         {
-            IA.Models.DatabaseStore db = new Models.DatabaseStore();
             if (ModelState.IsValid)
             {
                 if (mdl.IsValid(mdl.UserName,mdl.Password))

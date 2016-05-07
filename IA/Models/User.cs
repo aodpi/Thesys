@@ -26,5 +26,7 @@ namespace IA.Models
         public virtual Elevation Elevation { get; set; }
 
         public ICollection<NotificationChannel> NotificationChannels { get; set; }
+
+        public string avatar_uri { get; set; }
     }
 }
