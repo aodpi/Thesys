@@ -28,6 +28,28 @@ namespace IA.Controllers
         }
 
         [HttpPost]
+        public ActionResult Register(UserViewModel mdl)
+        {
+            var usr= db.Users.FirstOrDefault(f => f.UserName == mdl.UserName);
+            if (usr==null)
+            {
+                db.Users.Add(new User() { UserName = mdl.UserName, Password = Security.Encryption.Sha1Encode(mdl.Password), ElevationId = 1 });
+                db.SaveChanges();
+            }
+            return RedirectToAction("Login", new { @mdl = mdl });
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel mdl)
+        {
+            if (ModelState.IsValid)
+            {
+                UserViewModel usrmdl = new UserViewModel();
+                Login(usrmdl);
+            }
+            return View();
+        }
+        [HttpPost]
         public ActionResult Login(UserViewModel mdl)
         {
             if (ModelState.IsValid)
@@ -37,16 +59,7 @@ namespace IA.Controllers
                     
                     if (Request.Cookies[FormsAuthentication.FormsCookieName]==null)
                     {
-                        //FormsAuthentication.SetAuthCookie(mdl.UserName, mdl.RememberMe);
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                            mdl.UserName, 
-                            DateTime.Now, 
-                            DateTime.Now.AddMinutes(100), 
-                            mdl.RememberMe, 
-                            db.Users.GetUserId(mdl.UserName).ToString());
-                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
-                        HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                        Response.Cookies.Add(cookie);
+                        FormsAuthentication.SetAuthCookie(mdl.UserName, mdl.RememberMe);
                     }
                 }
                 else
@@ -55,7 +68,7 @@ namespace IA.Controllers
                     return View("Index", mdl);
                 }
             }
-            return RedirectToAction("Index", "Home", null);
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

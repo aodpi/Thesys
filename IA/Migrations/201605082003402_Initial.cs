@@ -22,8 +22,9 @@ namespace IA.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         UserName = c.String(nullable: false, maxLength: 20),
-                        Password = c.String(nullable: false, maxLength: 20),
+                        Password = c.String(nullable: false, maxLength: 200),
                         ElevationId = c.Int(nullable: false),
+                        avatar_uri = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Elevations", t => t.ElevationId, cascadeDelete: true)

@@ -3,6 +3,11 @@ using System.Web.Routing;
 using IA.App_Start;
 using System.Web.Optimization;
 using System.Web.Http;
+using System.Data.Entity;
+using IA.Models;
+using IA.Migrations;
+using System;
+using System.Data.Entity.Migrations;
 
 namespace IA
 {
@@ -14,6 +19,7 @@ namespace IA
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseStore, Configuration>());
         }
     }
 }

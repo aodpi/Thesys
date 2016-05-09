@@ -1,7 +1,12 @@
-﻿
+﻿@model IA.Models.ViewModels.UserViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.UserName);
+    @Html.TextBoxFor(m => m.Password);
+    <input type="submit" value="Davai" />
+}

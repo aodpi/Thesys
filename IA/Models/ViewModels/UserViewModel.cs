@@ -34,7 +34,8 @@ namespace IA.Models.ViewModels
         public bool IsValid(string username,string password)
         {
             //password = Encryption.Sha1Encode(password);
-            User usr = db.Users.FirstOrDefault(f => f.UserName == username && f.Password == password);
+            var psdhash = Encryption.Sha1Encode(password);
+            User usr = db.Users.FirstOrDefault(f => f.UserName == username && f.Password == psdhash);
             return usr == null ? false : true;
         }
     }

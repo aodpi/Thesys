@@ -12,7 +12,7 @@ namespace IA.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(IA.Models.DatabaseStore context)
+        protected override void Seed(DatabaseStore context)
         {
             context.Elevations.AddOrUpdate(
                 p => p.ElevationName,
@@ -21,9 +21,10 @@ namespace IA.Migrations
                 new Elevation { ElevationName = "Teacher" },
                 new Elevation { ElevationName = "Guest" });
             context.SaveChanges();
+
             context.Users.AddOrUpdate(
                 x => x.UserName,
-                new User { UserName = "aodpi", Password = "aodpiram1994", ElevationId = 1 });
+                new User { UserName = "aodpi", Password = "YjYwOWFjMjA2OTYyNTkwNDdlMzRhYzdhYzk3NTAyZjg3MTU1NmVjYQ==", ElevationId = 1, avatar_uri = "/Deepcoil.jpg" });
             context.SaveChanges();
             context.NotificationChannels.AddOrUpdate(
                 x => x.Id,

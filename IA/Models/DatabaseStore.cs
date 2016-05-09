@@ -11,13 +11,8 @@ namespace IA.Models
         public DatabaseStore():base("name=IAConn")
         {
         }
-
         public DbSet<Elevation> Elevations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<NotificationChannel> NotificationChannels { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

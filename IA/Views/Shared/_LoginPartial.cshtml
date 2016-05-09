@@ -6,7 +6,7 @@
             IA.Models.DatabaseStore db = new IA.Models.DatabaseStore();
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
             FormsAuthenticationTicket authticket = FormsAuthentication.Decrypt(authCookie.Value);
-            <li><a href="@Url.Action("Index","Account")" style="padding:9px;text-align:center"><img src="@Url.Content(db.Users.GetUserAvatarUri(authticket.Name))" width="30" height="30" class="img-circle" /></a></li>
+            <li><a href="@Url.Action("ProfileDetail","Account")" style="padding:9px;text-align:center"><img src="@Url.Content(db.Users.GetUserAvatarUri(authticket.Name))" width="30" height="30" class="img-circle" /></a></li>
         }
         else
         {
